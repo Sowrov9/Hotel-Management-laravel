@@ -26,6 +26,8 @@
 	<link rel="stylesheet" href="{{asset('assets')}}/css/app.css" />
 	<link rel="stylesheet" href="{{asset('assets')}}/css/dark-sidebar.css" />
 	<link rel="stylesheet" href="{{asset('assets')}}/css/dark-theme.css" />
+    <!-- Load Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
@@ -33,12 +35,12 @@
 	<div class="wrapper">
 		<!--sidebar-wrapper-->
 
-		@include("layout.backend.sidebar")
+		@include("layout.erp.sidebar")
 
 		<!--end sidebar-wrapper-->
 		<!--header-->
 
-            @include("layout.backend.header")
+            @include("layout.erp.header")
 
 		<!--end header-->
 		<!--page-wrapper-->
@@ -46,7 +48,7 @@
 			<!--page-content-wrapper-->
 			<div class="page-content-wrapper">
 
-				@yield("content")
+				@yield("page")
 
 			</div>
 			<!--end page-content-wrapper-->
@@ -59,7 +61,7 @@
 		<!--End Back To Top Button-->
 		<!--footer -->
 
-            @include("layout.backend.footer")
+            @include("layout.erp.footer")
 
 		<!-- end footer -->
 	</div>
@@ -120,6 +122,8 @@
 		new PerfectScrollbar('.dashboard-social-list');
 		new PerfectScrollbar('.dashboard-top-countries');
 	</script>
+    @yield('scripts')
+
 </body>
 
 </html>

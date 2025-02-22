@@ -1,5 +1,5 @@
-@extends("layout.backend.main")
-@section('content')
+@extends("layout.erp.app")
+@section('page')
 <div class="page-content">
     <div class="row">
         <div class="col-12 col-lg-4">

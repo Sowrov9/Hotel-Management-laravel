@@ -26,10 +26,10 @@
         </li>
         <li class="menu-label">Web Apps</li>
         <li>
-            <a href="emailbox.html">
+            <a href="{{url('admin/roomtype')}}">
                 <div class="parent-icon icon-color-2"><i class="bx bx-envelope"></i>
                 </div>
-                <div class="menu-title">Email</div>
+                <div class="menu-title">Room Types</div>
             </a>
         </li>
         <li>

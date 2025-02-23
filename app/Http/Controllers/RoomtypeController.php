@@ -94,7 +94,7 @@ class RoomtypeController extends Controller
     $roomtype->delete();
 
     // Redirect with success message
-    return redirect()->route('admin.roomtype.index')->with('success', 'Room type deleted successfully.');
+    return redirect("admin/roomtype")->with('success', 'Room type deleted successfully.');
 }
 
 }

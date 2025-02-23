@@ -24,13 +24,34 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-label">Web Apps</li>
+        <li class="menu-label">Masters </li>
+        {{-- Roomtype menu --}}
         <li>
-            <a href="{{url('admin/roomtype')}}">
-                <div class="parent-icon icon-color-2"><i class="bx bx-envelope"></i>
+            <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon icon-color-11"><i class="fa-solid fa-house-circle-check"></i></i>
                 </div>
                 <div class="menu-title">Room Types</div>
             </a>
+            <ul>
+                <li> <a href="{{url('admin/roomtype/create')}}"><i class="bx bx-right-arrow-alt"></i>Add New</a>
+                </li>
+                <li> <a href="{{url('admin/roomtype')}}"><i class="bx bx-right-arrow-alt"></i>View All</a>
+                </li>
+            </ul>
+        </li>
+        {{-- Room menu --}}
+        <li>
+            <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon icon-color-11"><i class="fa-solid fa-house-chimney-window"></i>
+                </div>
+                <div class="menu-title">Rooms</div>
+            </a>
+            <ul>
+                <li> <a href="{{url('admin/room/create')}}"><i class="bx bx-right-arrow-alt"></i>Add New</a>
+                </li>
+                <li> <a href="{{url('admin/room')}}"><i class="bx bx-right-arrow-alt"></i>View All</a>
+                </li>
+            </ul>
         </li>
         <li>
             <a href="chat-box.html">
@@ -39,27 +60,7 @@
                 <div class="menu-title">Chat Box</div>
             </a>
         </li>
-        <li>
-            <a href="file-manager.html">
-                <div class="parent-icon icon-color-4"><i class="bx bx-archive"></i>
-                </div>
-                <div class="menu-title">File Manager</div>
-            </a>
-        </li>
-        <li>
-            <a href="contact-list.html">
-                <div class="parent-icon icon-color-5"><i class="bx bx-group"></i>
-                </div>
-                <div class="menu-title">Contatcs</div>
-            </a>
-        </li>
-        <li>
-            <a href="to-do.html">
-                <div class="parent-icon icon-color-6"><i class="bx bx-task"></i>
-                </div>
-                <div class="menu-title">Todo List</div>
-            </a>
-        </li>
+
         <li>
             <a href="invoice.html">
                 <div class="parent-icon icon-color-7"><i class="bx bx-file"></i>

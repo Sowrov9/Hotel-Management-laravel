@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends Model
 {
     function roomType(){
-        return $this->belongsTo(RoomType::class,'roomtype_id');
+        return $this->belongsTo(RoomType::class,'room_type_id');
     }
 }

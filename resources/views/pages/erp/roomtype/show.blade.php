@@ -2,6 +2,7 @@
 @section('page')
 <div class="card-title">
     <h4 class="mb-0">Show Details</h4>
+    <a href="{{url('admin/roomtype')}}" class="btn btn-primary mb-2 btn-sm float-right">View all</a>
 </div>
 <div class="table-responsive">
     <table id="example2" class="table table-striped table-bordered" style="width:100%">

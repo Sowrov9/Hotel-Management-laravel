@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomtypeController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get("admin/roomtype/delete/{id}",[RoomtypeController::class,'destroy']);
+// roomtype route
+Route::get("admin/roomtype/{id}/delete",[RoomtypeController::class,'destroy']);
 Route::resource("admin/roomtype",RoomtypeController::class);
+
+// room route
+// Route::get("admin/room/{id}/delete",[RoomtypeController::class,'destroy']);
+Route::resource("admin/room",RoomController::class);
 
 require __DIR__.'/auth.php';

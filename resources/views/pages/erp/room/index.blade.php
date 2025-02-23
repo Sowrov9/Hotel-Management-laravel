@@ -9,8 +9,8 @@
 
     <div class="card-body">
         <div class="card-title">
-            <h4 class="mb-0">Roomtypes</h4>
-            <a href="{{url('admin/roomtype/create')}}" class="btn btn-primary mb-2 btn-sm float-right">Add New Room</a>
+            <h4 class="mb-0">Rooms</h4>
+            <a href="{{url('admin/room/create')}}" class="btn btn-primary mb-2 btn-sm float-right">Add New Room</a>
         </div>
         <br>
         <hr/>
@@ -20,17 +20,17 @@
                     <tr>
                         <th>Id</th>
                         <th>Title</th>
-                        <th>Details</th>
+                        <th>Room_type</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                        @forelse ($roomtypes as $roomtype)
+                        @forelse ($rooms as $room)
                             <tr>
-                                <td>{{$roomtype->id}}</td>
-                                <td>{{$roomtype->title}}</td>
-                                <td>{{$roomtype->details}}</td>
+                                <td>{{$room->id}}</td>
+                                <td>{{$room->title}}</td>
+                                <td>{{$room->roomtype->title}}</td>
                                 <td>
                                     <a href="{{url('admin/roomtype/'.$roomtype->id)}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                                     <a href="{{url('admin/roomtype/'.$roomtype->id.'/edit')}}" class="btn btn-secondary"> <i class="fa fa-edit"></i></a>
@@ -45,7 +45,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Title</th>
-                        <th>Description</th>
+                        <th>Room_type</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>

@@ -35,16 +35,17 @@ class CustomerController extends Controller
             'email'=>'required|email|unique:customers,email',
             'password'=>'required|min:6',
             'mobile' => 'required|numeric|min:11',
-            'address' => 'required|string|min:5|max:255',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4096',
+            // 'address' => 'required|string|min:5|max:255',
+            // 'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4096',
         ]);
         $customer=new Customer();
+        $imgpath=$request->file('photo')->store('public/assets/images');
         $customer->name=$request->name;
         $customer->email=$request->email;
-        $customer->password=$request->password;
+        $customer->password=sha1($request->password);
         $customer->mobile=$request->mobile;
         $customer->address=$request->address;
-        $customer->photo=$request->photo;
+        $customer->photo=$imgpath;
         $customer=$customer->save();
         if($customer){
             return redirect("admin/customer")->with("success","customer successfully created");
@@ -76,11 +77,21 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title'=>'required',
+            'name'=>'required|min:3',
+            'email'=>'required|email|unique:customers,email',
+            'password'=>'required|min:6',
+            'mobile' => 'required|numeric|min:11',
+            // 'address' => 'required|string|min:5|max:255',
+            // 'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4096',
         ]);
-        $customer= Customer::find($id);
-        $customer->title=$request->title;
-        $customer->details=$request->details;
+        $customer=new Customer();
+        $imgpath=$request->file('photo')->store('public/assets/images');
+        $customer->name=$request->name;
+        $customer->email=$request->email;
+        $customer->password=sha1($request->password);
+        $customer->mobile=$request->mobile;
+        $customer->address=$request->address;
+        $customer->photo=$imgpath;
         $customer=$customer->save();
         if($customer){
             return redirect("admin/customer")->with("success","Data successfully updated");

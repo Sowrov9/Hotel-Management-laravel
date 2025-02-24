@@ -16,7 +16,7 @@
                         <hr />
                         <div class="form-body">
                                 <div class="form-group">
-                                    <label>Name</label>
+                                    <label>Name <span class="text-danger">*</span></label>
                                     <input type="text" name="name" value="{{old('name')}}" class="form-control radius-30" />
                                     @error('name')
                                         <span style="color: red">{{$message}}</span>
@@ -24,21 +24,21 @@
                                 </div>
 
                             <div class="form-group">
-                                <label>Email</label>
+                                <label>Email <span class="text-danger">*</span></label>
                                 <input type="text" name="email" value="{{old('email')}}" class="form-control radius-30" />
                                 @error('email')
                                         <span style="color: red">{{$message}}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Password</label>
+                                <label>Password <span class="text-danger">*</span></label>
                                 <input type="password" name="password" value="{{old('password')}}" class="form-control radius-30" />
                                 @error('password')
                                         <span style="color: red">{{$message}}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Mobile</label>
+                                <label>Mobile<span class="text-danger">*</span></label>
                                 <input type="text" name="mobile" value="{{old('mobile')}}" class="form-control radius-30" />
                                 @error('mobile')
                                         <span style="color: red">{{$message}}</span>

@@ -10,7 +10,7 @@
     <div class="card-body">
         <div class="card-title">
             <h4 class="mb-0">Customers</h4>
-            <a href="{{url('admin/roomtype/create')}}" class="btn btn-primary mb-2 btn-sm float-right">Add New Customer</a>
+            <a href="{{url('admin/customer/create')}}" class="btn btn-primary mb-2 btn-sm float-right">Add New Customer</a>
         </div>
         <br>
         <hr/>
@@ -38,7 +38,7 @@
                                 <td>{{$customer->password}}</td>
                                 <td>{{$customer->mobile}}</td>
                                 <td>{{$customer->address}}</td>
-                                <td><img src="" alt=""></td>
+                                <td><img src="{{asset('images/'.$customer->photo) }}" alt=""></td>
                                 <td>
                                     <a href="{{url('admin/customer/'.$customer->id)}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                                     <a href="{{url('admin/customer/'.$customer->id.'/edit')}}" class="btn btn-secondary"> <i class="fa fa-edit"></i></a>

@@ -9,8 +9,8 @@
 
     <div class="card-body">
         <div class="card-title">
-            <h4 class="mb-0">Rooms</h4>
-            <a href="{{url('admin/room/create')}}" class="btn btn-primary mb-2 btn-sm float-right">Add New Room</a>
+            <h4 class="mb-0">Customers</h4>
+            <a href="{{url('admin/roomtype/create')}}" class="btn btn-primary mb-2 btn-sm float-right">Add New Customer</a>
         </div>
         <br>
         <hr/>
@@ -19,22 +19,30 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Title</th>
-                        <th>Room_type</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>mobile</th>
+                        <th>Address</th>
+                        <th>Photo</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                        @forelse ($rooms as $room)
+                        @forelse ($customers as $customer)
                             <tr>
-                                <td>{{$room->id}}</td>
-                                <td>{{$room->title}}</td>
-                                <td>{{$room->roomType->title}}</td>
+                                <td>{{$customer->id}}</td>
+                                <td>{{$customer->name}}</td>
+                                <td>{{$customer->email}}</td>
+                                <td>{{$customer->password}}</td>
+                                <td>{{$customer->mobile}}</td>
+                                <td>{{$customer->address}}</td>
+                                <td><img src="" alt=""></td>
                                 <td>
-                                    <a href="{{url('admin/room/'.$room->id)}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                                    <a href="{{url('admin/room/'.$room->id.'/edit')}}" class="btn btn-secondary"> <i class="fa fa-edit"></i></a>
-                                    <a onclick="return confirm('Are you sure to delete the data?')" href="{{url('admin/room/'.$room->id.'/delete')}}" class="btn btn-danger"> <i class="fa fa-trash"></i></a>
+                                    <a href="{{url('admin/customer/'.$customer->id)}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                                    <a href="{{url('admin/customer/'.$customer->id.'/edit')}}" class="btn btn-secondary"> <i class="fa fa-edit"></i></a>
+                                    <a onclick="return confirm('Are you sure to delete the data?')" href="{{url('admin/customer/'.$customer->id.'/delete')}}" class="btn btn-danger"> <i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         @empty
@@ -45,7 +53,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Title</th>
-                        <th>Room_type</th>
+                        <th>Description</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>

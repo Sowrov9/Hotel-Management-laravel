@@ -25,12 +25,12 @@
 
                             <div class="form-group">
                                 <label>Select Room Type</label>
-                                <select name="room_type" id="">
+                                <select name="room_type_id" id="">
                                     <option value="0">--Select Room Type--</option>
                                     @forelse ($roomtypes as $roomtype)
                                         <option value="{{$roomtype->id}}">{{$roomtype->title}}</option>
                                     @empty
-
+                                        <div>data empty</div>
                                     @endforelse
                                 </select>
                             </div>

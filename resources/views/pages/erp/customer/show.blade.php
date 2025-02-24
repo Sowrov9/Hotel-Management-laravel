@@ -2,22 +2,22 @@
 @section('page')
 <div class="card-title">
     <h4 class="mb-0">Show Details</h4>
-    <a href="{{url('admin/room')}}" class="btn btn-primary mb-2 btn-sm float-right">View all</a>
+    <a href="{{url('admin/roomtype')}}" class="btn btn-primary mb-2 btn-sm float-right">View all</a>
 </div>
 <div class="table-responsive">
     <table id="example2" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>Id</th>
-                <td>{{$room->id}}</td>
+                <td>{{$roomtype->id}}</td>
             </tr>
             <tr>
                 <th>Title</th>
-                <td>{{$room->title}}</td>
+                <td>{{$roomtype->title}}</td>
             </tr>
             <tr>
-                <th>Room Type</th>
-                <td>{{$room->roomtype->title}}</td>
+                <th>Details</th>
+                <td>{{$roomtype->details}}</td>
             </tr>
         </thead>
     </table>

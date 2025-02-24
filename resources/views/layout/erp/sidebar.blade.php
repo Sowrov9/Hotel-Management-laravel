@@ -25,7 +25,7 @@
             </ul>
         </li>
         <li class="menu-label">Masters </li>
-        {{-- Roomtype menu --}}
+        {{-- Roomtype Master --}}
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon icon-color-11"><i class="fa-solid fa-house-circle-check"></i></i>
@@ -39,7 +39,7 @@
                 </li>
             </ul>
         </li>
-        {{-- Room menu --}}
+        {{-- Room Master --}}
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon icon-color-11"><i class="fa-solid fa-house-chimney-window"></i>
@@ -53,6 +53,22 @@
                 </li>
             </ul>
         </li>
+        {{-- Customer Master --}}
+        <li>
+            <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon icon-color-11"><i class="fa-solid fa-users"></i></i>
+                </div>
+                <div class="menu-title">Customers</div>
+            </a>
+            <ul>
+                <li> <a href="{{url('admin/customer/create')}}"><i class="bx bx-right-arrow-alt"></i>Add New</a>
+                </li>
+                <li> <a href="{{url('admin/customer')}}"><i class="bx bx-right-arrow-alt"></i>View All</a>
+                </li>
+            </ul>
+        </li>
+
+
         <li>
             <a href="chat-box.html">
                 <div class="parent-icon icon-color-3"> <i class="bx bx-conversation"></i>

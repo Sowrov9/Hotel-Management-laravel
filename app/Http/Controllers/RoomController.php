@@ -24,8 +24,8 @@ class RoomController extends Controller
      */
     public function create()
     {
-        // $roomtypes= RoomType::all();
-        return view("pages.erp.room.index", compact("roomtypes"));
+        $roomtypes= RoomType::all();
+        return view("pages.erp.room.create", compact("roomtypes"));
     }
 
     /**
@@ -33,15 +33,26 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title'=>'required',
+        ]);
+        $room=new Room();
+        $room->title=$request->title;
+        $room->room_type_id	=$request->room_type_id;
+
+        $room->save();
+        if($room){
+            return redirect("admin/room")->with("success","Room Successfully created");
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show( $id)
     {
-        //
+        $room= Room::find($id);
+        return view("pages.erp.room.show",compact("room"));
     }
 
     /**
@@ -49,7 +60,9 @@ class RoomController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $roomtypes= RoomType::all();
+        $room=Room::find($id);
+        return view("pages.erp.room.update",compact("room","roomtypes"));
     }
 
     /**
@@ -57,7 +70,16 @@ class RoomController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'title'=>'required',
+        ]);
+        $room=Room::find($id);
+        $room->title=$request->title;
+        $room->room_type_id=$request->room_type_id;
+        $room->save();
+        if($room){
+            return redirect("admin/room")->with("success","Room Successfully updated");
+        }
     }
 
     /**
@@ -65,6 +87,8 @@ class RoomController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $room=Room::find($id);
+        $room->delete();
+        return redirect("admin/room")->with("success","Room Successfully deleted");
     }
 }

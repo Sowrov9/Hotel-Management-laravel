@@ -38,7 +38,7 @@
                                 <td>{{$customer->password}}</td>
                                 <td>{{$customer->mobile}}</td>
                                 <td>{{$customer->address}}</td>
-                                <td><img src="{{asset('images/'.$customer->photo) }}" alt=""></td>
+                                <td><img width="70" src="{{asset('images/'.$customer->photo) }}" alt=""></td>
                                 <td>
                                     <a href="{{url('admin/customer/'.$customer->id)}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                                     <a href="{{url('admin/customer/'.$customer->id.'/edit')}}" class="btn btn-secondary"> <i class="fa fa-edit"></i></a>
@@ -50,12 +50,7 @@
                         @endforelse
                 </tbody>
                 <tfoot>
-                    <tr>
-                        <th>Id</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Action</th>
-                    </tr>
+
                 </tfoot>
             </table>
         </div>

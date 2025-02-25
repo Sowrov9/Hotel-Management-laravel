@@ -47,9 +47,9 @@
 		<div class="page-wrapper">
 			<!--page-content-wrapper-->
 			<div class="page-content-wrapper">
-
-				@yield("page")
-
+                <div class="page-content">
+				    @yield("page")
+                </div>
 			</div>
 			<!--end page-content-wrapper-->
 		</div>

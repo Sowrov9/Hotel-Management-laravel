@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class CustomerController extends Controller
 {
@@ -35,17 +36,25 @@ class CustomerController extends Controller
             'email'=>'required|email|unique:customers,email',
             'password'=>'required|min:6',
             'mobile' => 'required|numeric|min:11',
-            // 'address' => 'required|string|min:5|max:255',
-            // 'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4096',
+            'address' => 'required|string|min:5|max:255',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4096',
         ]);
+
+        if($request->hasFile('photo')){
+            $file = $request->file('photo');
+            $photoName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images'), $photoName);
+        }else{
+            $photoName=Null;
+        }
+
         $customer=new Customer();
-        $imgpath=$request->file('photo')->store('public/assets/images');
         $customer->name=$request->name;
         $customer->email=$request->email;
         $customer->password=sha1($request->password);
         $customer->mobile=$request->mobile;
         $customer->address=$request->address;
-        $customer->photo=$imgpath;
+        $customer->photo=$photoName;
         $customer=$customer->save();
         if($customer){
             return redirect("admin/customer")->with("success","customer successfully created");
@@ -78,20 +87,27 @@ class CustomerController extends Controller
     {
         $request->validate([
             'name'=>'required|min:3',
-            'email'=>'required|email|unique:customers,email',
-            'password'=>'required|min:6',
+            'email'=>'required|email',
+            // 'password'=>'required|min:6',
             'mobile' => 'required|numeric|min:11',
             // 'address' => 'required|string|min:5|max:255',
             // 'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4096',
         ]);
-        $customer=new Customer();
-        $imgpath=$request->file('photo')->store('public/assets/images');
+        if($request->hasFile('photo')){
+            $file = $request->file('photo');
+            $photoName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images'), $photoName);
+        }else{
+            $photoName=Null;
+        }
+        $customer= Customer::find($id);
+        // $imgpath=$request->file('photo')->store('public/assets/images');
         $customer->name=$request->name;
         $customer->email=$request->email;
-        $customer->password=sha1($request->password);
+        // $customer->password=sha1($request->password);
         $customer->mobile=$request->mobile;
         $customer->address=$request->address;
-        $customer->photo=$imgpath;
+        $customer->photo=$photoName;
         $customer=$customer->save();
         if($customer){
             return redirect("admin/customer")->with("success","Data successfully updated");

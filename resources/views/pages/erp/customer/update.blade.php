@@ -35,13 +35,13 @@
                                     <span style="color: red">{{$message}}</span>
                             @enderror
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label>Password</label>
                             <input type="text" name="password" value="{{$customer->password}}" class="form-control radius-30" />
                             @error('password')
                                     <span style="color: red">{{$message}}</span>
                             @enderror
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <label>Mobile</label>
                             <input type="text" name="mobile" value="{{$customer->mobile}}" class="form-control radius-30" />
@@ -58,11 +58,24 @@
                         </div>
                         <div class="form-group">
                             <label>Photo</label>
-                            <input type="file" name="photo" value="{{asset('images/'.$customer->photo)}}" class="form-control radius-30" />
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <!-- File Input -->
+                                <input type="file" name="photo" value="{{$customer->photo}}" class="form-control radius-30" id="photoInput">
+
+                                <!-- Preview Image -->
+                                <img id="photoPreview" width="70"
+                                     src="{{ asset('images/' . $customer->photo) }}"
+                                     alt="Customer Photo">
+                            </div>
+
                             @error('photo')
-                                    <span style="color: red">{{$message}}</span>
+                                <span style="color: red">{{ $message }}</span>
                             @enderror
                         </div>
+
+
+
+
 
                         <button type="submit" class="btn btn-primary px-5 radius-30">Update</button>
                     </div>
@@ -72,5 +85,18 @@
 
     </div>
 </form>
+ <!-- jQuery for Live Image Preview -->
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script>
+ $(document).ready(function(){
+     $('#photoInput').change(function(e){
+         let reader = new FileReader();
+         reader.onload = function(event){
+             $('#photoPreview').attr('src', event.target.result);
+         };
+         reader.readAsDataURL(e.target.files[0]);
+     });
+ });
+ </script>
 
 @endsection

@@ -20,6 +20,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Title</th>
+                        <th>Price</th>
                         <th>Details</th>
                         <th>Action</th>
                     </tr>
@@ -30,6 +31,7 @@
                             <tr>
                                 <td>{{$roomtype->id}}</td>
                                 <td>{{$roomtype->title}}</td>
+                                <td>{{$roomtype->price}}</td>
                                 <td>{{$roomtype->details}}</td>
                                 <td>
                                     <a href="{{url('admin/roomtype/'.$roomtype->id)}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
@@ -45,6 +47,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Title</th>
+                        <th>Price</th>
                         <th>Description</th>
                         <th>Action</th>
                     </tr>

@@ -16,6 +16,10 @@
                 <td>{{$roomtype->title}}</td>
             </tr>
             <tr>
+                <th>Price</th>
+                <td>{{$roomtype->price}}</td>
+            </tr>
+            <tr>
                 <th>Details</th>
                 <td>{{$roomtype->details}}</td>
             </tr>

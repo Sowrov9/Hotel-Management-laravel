@@ -42,8 +42,8 @@ class CustomerController extends Controller
 
         if($request->hasFile('photo')){
             $file = $request->file('photo');
-            $photoName = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('images'), $photoName);
+            $photoName = time() . '_' . $file->getClientOriginalName(); //
+            $file->move(public_path('assets/images'), $photoName);
         }else{
             $photoName=Null;
         }
@@ -83,7 +83,7 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
         $request->validate([
             'name'=>'required|min:3',
@@ -93,14 +93,19 @@ class CustomerController extends Controller
             // 'address' => 'required|string|min:5|max:255',
             // 'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4096',
         ]);
-        if($request->hasFile('photo')){
-            $file = $request->file('photo');
-            $photoName = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('images'), $photoName);
-        }else{
-            $photoName=Null;
-        }
         $customer= Customer::find($id);
+
+        if($request->hasFile('photo')){
+            if (!empty($customer->photo) && file_exists(public_path('assets/images/' . $customer->photo))) {
+                unlink(public_path('assets/images/' . $customer->photo)); // Remove old photo
+            }
+            $file = $request->file('photo');
+            $photoName = time() . '_' . $file->getClientOriginalName(); //
+            $file->move(public_path('assets/images'), $photoName);
+        }else{
+            $photoName=$request->prev_photo;
+        }
+
         // $imgpath=$request->file('photo')->store('public/assets/images');
         $customer->name=$request->name;
         $customer->email=$request->email;

@@ -1,6 +1,6 @@
 @extends('layout.erp.app')
 @section('page')
-    
+
 <form action="{{ url('admin/roomtype/'.$roomtype->id) }}" method="POST">
 
     @csrf
@@ -24,6 +24,13 @@
                                 <label>Title</label>
                                 <input type="text" name="title" value="{{$roomtype->title}}" class="form-control radius-30" />
                                 @error('title')
+                                    <span style="color: red">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input type="text" name="price" value="{{$roomtype->price}}" class="form-control radius-30" />
+                                @error('price')
                                     <span style="color: red">{{$message}}</span>
                                 @enderror
                             </div>

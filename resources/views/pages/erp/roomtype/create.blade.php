@@ -22,6 +22,13 @@
                                         <span style="color: red">{{$message}}</span>
                                     @enderror
                                 </div>
+                                <div class="form-group">
+                                    <label>Price</label>
+                                    <input type="number" name="price" value="{{old('price')}}" class="form-control radius-30" />
+                                    @error('price')
+                                        <span style="color: red">{{$message}}</span>
+                                    @enderror
+                                </div>
 
                             <div class="form-group">
                                 <label>Details</label>

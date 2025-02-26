@@ -34,6 +34,7 @@ class RoomtypeController extends Controller
         ]);
         $roomtype=new RoomType();
         $roomtype->title=$request->title;
+        $roomtype->price=$request->price;
         $roomtype->details=$request->details;
         $roomtype=$roomtype->save();
         if($roomtype){
@@ -70,6 +71,7 @@ class RoomtypeController extends Controller
         ]);
         $roomtype= RoomType::find($id);
         $roomtype->title=$request->title;
+        $roomtype->price=$request->price;
         $roomtype->details=$request->details;
         $roomtype=$roomtype->save();
         if($roomtype){

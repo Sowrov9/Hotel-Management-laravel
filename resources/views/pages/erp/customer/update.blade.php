@@ -60,11 +60,12 @@
                             <label>Photo</label>
                             <div style="display: flex; align-items: center; gap: 10px;">
                                 <!-- File Input -->
-                                <input type="file" name="photo" value="{{$customer->photo}}" class="form-control radius-30" id="photoInput">
+                                <input type="file" name="photo" class="form-control radius-30" id="photoInput">
+                                <input type="hidden" name="prev_photo" value="{{$customer->photo}}">
 
                                 <!-- Preview Image -->
                                 <img id="photoPreview" width="70"
-                                     src="{{ asset('images/' . $customer->photo) }}"
+                                     src="{{ asset('assets/images/' . $customer->photo) }}"
                                      alt="Customer Photo">
                             </div>
 

@@ -67,6 +67,12 @@
                 </li>
             </ul>
         </li>
+        {{-- logout menu  --}}
+        <a href="{{url('admin/logout')}}" class="has-arrow">
+            <div class="parent-icon icon-color-1"><i class="fa-solid fa-right-from-bracket"></i>
+            </div>
+            <div class="menu-title">Log Out</div>
+        </a>
 
 
         <li>

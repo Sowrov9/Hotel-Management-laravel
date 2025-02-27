@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
@@ -9,6 +10,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+//login/logout route
+Route::get('admin/login',[AdminController::class,'login']);
+Route::post('admin/login',[AdminController::class,'login_check']);
+Route::get('admin/logout',[AdminController::class,'logout']);
 
 Route::get('/admin', function () {
     return view('pages.dashboard');

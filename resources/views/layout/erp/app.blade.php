@@ -7,6 +7,14 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<title>Syndash - Bootstrap4 Admin Template</title>
+    {{-- admin condition --}}
+    @if (!Session::has('adminData')){
+        <script type="text/javascript">
+            window.location.href="{{url('admin/login')}}"
+        </script>
+    }
+
+    @endif
 	<!--favicon-->
 	<link rel="icon" href="{{asset('assets')}}/images/favicon-32x32.png" type="image/png" />
 	<!-- Vector CSS -->
@@ -28,6 +36,8 @@
 	<link rel="stylesheet" href="{{asset('assets')}}/css/dark-theme.css" />
     <!-- Load Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
 </head>
 
 <body>

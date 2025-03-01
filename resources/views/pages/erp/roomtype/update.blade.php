@@ -42,6 +42,28 @@
                                     <span style="color: red">{{$message}}</span>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label>Gallery</label>
+                            <div>
+                                <input type="file" name="imgs[]" class="form-control radius-30" multiple /> <!-- Added "multiple" -->
+
+                                @error('imgs.*') <!-- Updated error validation -->
+                                    <span style="color: red">{{ $message }}</span>
+                                @enderror
+
+                                <table>
+                                    <tr>
+                                        @foreach ($roomtype->roomtypeimages as $img)
+                                            <td>
+                                                <img src="{{ asset('assets/images/'.$img->img_src) }}" alt="" width="100px" height="100px">
+                                            </td>
+                                        @endforeach
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+
 
                         <button type="submit" class="btn btn-primary px-5 radius-30">Update</button>
                     </div>

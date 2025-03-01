@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RoomType;
+use App\Models\Roomtypeimage;
 use Illuminate\Http\Request;
 
 class RoomtypeController extends Controller
@@ -30,16 +31,34 @@ class RoomtypeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'=>'required',
+            'title' => 'required',
+            'price' => 'required|numeric',
+            'imgs' => 'sometimes|array', // Allow imgs to be missing instead of nullable
+            'imgs.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048' // Validate each file individually
         ]);
+
         $roomtype=new RoomType();
         $roomtype->title=$request->title;
         $roomtype->price=$request->price;
         $roomtype->details=$request->details;
-        $roomtype=$roomtype->save();
-        if($roomtype){
-            return redirect("admin/roomtype")->with("success","Roomtype successfully created");
+        $roomtype->save();
+
+        if ($request->hasFile('imgs')) {
+            foreach (array_values($request->file('imgs')) as $img) { // Force array indexing
+                $imgpath = $img->store('public/assets/images');
+                $imgdata = new Roomtypeimage();
+                $imgdata->room_type_id = $roomtype->id;
+                $imgdata->img_src = $imgpath;
+                $imgdata->img_alt = $roomtype->title;
+                $imgdata->save();
+            }
         }
+
+
+
+
+            return redirect("admin/roomtype")->with("success","Roomtype successfully created");
+
 
     }
 

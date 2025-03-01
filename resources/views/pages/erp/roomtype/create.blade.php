@@ -1,6 +1,6 @@
 @extends('layout.erp.app')
 @section('page')
-    <form action="{{ url('admin/roomtype') }}" method="POST">
+    <form action="{{ url('admin/roomtype') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-12 col-lg-12">
@@ -34,6 +34,13 @@
                                 <label>Details</label>
                                 <input type="text" name="details" value="{{old('details')}}" class="form-control radius-30" />
                                 @error('details')
+                                        <span style="color: red">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Gallery</label>
+                                <input type="file" multiple name="imgs[]" class="form-control radius-30" />
+                                @error('imgs')
                                         <span style="color: red">{{$message}}</span>
                                 @enderror
                             </div>

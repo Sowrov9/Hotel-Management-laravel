@@ -34,7 +34,7 @@ class RoomtypeController extends Controller
             'title' => 'required',
             'price' => 'required|numeric',
             'imgs' => 'sometimes|array', // Allow imgs to be missing instead of nullable
-            'imgs.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048' // Validate each file individually
+            'imgs.*' => 'image|mimes:jpeg,png,jpg,gif' // Validate each file individually
         ]);
 
         $roomtype=new RoomType();
@@ -43,18 +43,51 @@ class RoomtypeController extends Controller
         $roomtype->details=$request->details;
         $roomtype->save();
 
-        if ($request->hasFile('imgs')) {
-            foreach (array_values($request->file('imgs')) as $img) { // Force array indexing
-                $imgpath = $img->store('public/assets/images');
-                $imgdata = new Roomtypeimage();
-                $imgdata->room_type_id = $roomtype->id;
-                $imgdata->img_src = $imgpath;
-                $imgdata->img_alt = $roomtype->title;
-                $imgdata->save();
-            }
+        // if ($request->hasFile('imgs')) {
+        //     foreach (array_values($request->file('imgs')) as $img) { // Force array indexing
+        //         $typename=$request->title;
+        //         $imgname=str_replace('','_',$typename).'.'.$request->file($img)->getClientOriginalName();
+        //         // $imgpath = time() . '_' . $file->getClientOriginalName();
+        //         $imgpath = $img->store('public/storage/images'.$imgname);
+        //         $imgdata = new Roomtypeimage();
+        //         $imgdata->room_type_id = $request->id;
+        //         $imgdata->img_src = $imgpath;
+        //         $imgdata->img_alt = $request->title;
+        //         $imgdata->save();
+        //         if ( $imgdata->save()) {
+        //             echo "Success";
+        //         }
+        //     }
+        // }
+
+        // foreach ($request->file('imgs') as $img) {
+        //     $typename=$request->title;
+        //     $imgname=str_replace('','_',$typename).'.'.$request->file($img)->getClientOriginalExtension();
+        //     // $imgpath=$img->store('public/images');
+        //     $imgpath=$img->move(public_path('storage/images/'),$imgname);
+        //     $imgdata=new Roomtypeimage();
+        //     $imgdata->room_type_id=$roomtype->id;
+        //     $imgdata->img_src=$imgpath;
+        //     $imgdata->img_alt=$request->title;
+        //     $imgdata->save();
+        // }
+        foreach ($request->file('imgs') as $img) {
+            $typename = str_replace(' ', '_', $request->title); // Replace spaces with underscores
+            $extension = $img->getClientOriginalExtension(); // Get file extension
+
+            // Generate a unique filename
+            $imgname = $typename . '_' . time() . '_' . uniqid() . '.' . $extension;
+
+            // Move file to the storage path
+            $img->move(public_path('storage/images/'), $imgname);
+
+            // Save image details to database
+            $imgdata = new Roomtypeimage();
+            $imgdata->room_type_id = $roomtype->id;
+            $imgdata->img_src = $imgname; // Store only the filename
+            $imgdata->img_alt = $request->title;
+            $imgdata->save();
         }
-
-
 
 
             return redirect("admin/roomtype")->with("success","Roomtype successfully created");
@@ -74,11 +107,17 @@ class RoomtypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+    // public function edit($id)
+    // {
+    //     $roomtype= RoomType::find($id);
+    //     return view("pages.erp.roomtype.update",compact('roomtype'));
+    // }
     public function edit($id)
-    {
-        $roomtype= RoomType::find($id);
-        return view("pages.erp.roomtype.update",compact('roomtype'));
-    }
+{
+    $roomtype = RoomType::with('roomtypeimages')->findOrFail($id);
+    return view("pages.erp.roomtype.update", compact('roomtype'));
+}
+
 
     /**
      * Update the specified resource in storage.

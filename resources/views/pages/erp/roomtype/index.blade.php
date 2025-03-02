@@ -10,7 +10,7 @@
     <div class="card-body">
         <div class="card-title">
             <h4 class="mb-0">Roomtypes</h4>
-            <a href="{{url('admin/roomtype/create')}}" class="btn btn-primary mb-2 btn-sm float-right">Add New Room</a>
+            <a href="{{url('admin/roomtype/create')}}" class="btn btn-primary mb-2 btn-sm float-right">Add New Room Type</a>
         </div>
         <br>
         <hr/>

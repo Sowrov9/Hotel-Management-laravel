@@ -51,15 +51,25 @@
                                     <span style="color: red">{{ $message }}</span>
                                 @enderror
 
+                                {{-- <table>
+                                    <tr>
+                                        @foreach ($roomtype->roomtypeimages as $img)
+                                            <td>
+                                                <img src="{{ asset('storage/images/').$img->img_src }}" alt="" width="100px" height="100px">
+                                            </td>
+                                        @endforeach
+                                    </tr>
+                                </table> --}}
                                 <table>
                                     <tr>
                                         @foreach ($roomtype->roomtypeimages as $img)
                                             <td>
-                                                <img src="{{ asset('assets/images/'.$img->img_src) }}" alt="" width="100px" height="100px">
+                                                <img src="{{ asset('storage/images/' . $img->img_src) }}" alt="{{ $roomtype->title }}" width="100px" height="100px">
                                             </td>
                                         @endforeach
                                     </tr>
                                 </table>
+
                             </div>
                         </div>
 

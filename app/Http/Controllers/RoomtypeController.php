@@ -157,4 +157,20 @@ class RoomtypeController extends Controller
     return redirect("admin/roomtype")->with('success', 'Room type deleted successfully.');
 }
 
+public function destroy_img($img_id)
+{
+    // Find the room type by ID
+    $roomtypeimage = Roomtypeimage::find($img_id);
+
+    // Check if the record exists
+    if (!$roomtypeimage) {
+        return redirect()->back()->with('error', 'Room type not found.');
+    }
+
+    // Delete the record
+    $roomtypeimage->delete();
+
+    return response()->json(['bool'=>true]);
+}
+
 }

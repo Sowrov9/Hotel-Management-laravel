@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Roomtypeimage extends Model
 {
-    protected $fillable=["room_type_id"];
+    public function roomtype(){
+        return $this->belongsTo(RoomType::class,'room_type_id');
+    }
 }

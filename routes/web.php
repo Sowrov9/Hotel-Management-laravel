@@ -37,4 +37,8 @@ Route::resource("admin/room",RoomController::class);
 Route::get("admin/customer/{id}/delete",[CustomerController::class,'destroy']);
 Route::resource("admin/customer",CustomerController::class);
 
+//roomtype image delete
+Route::get("admin/roomtypeimage/{id}/delete",[RoomtypeController::class,'destroy_img']);
+
+
 require __DIR__.'/auth.php';

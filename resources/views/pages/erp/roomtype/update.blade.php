@@ -63,8 +63,9 @@
                                 <table>
                                     <tr>
                                         @foreach ($roomtype->roomtypeimages as $img)
-                                            <td>
+                                            <td class="imgcol{{$img->id}}">
                                                 <img src="{{ asset('storage/images/' . $img->img_src) }}" alt="{{ $roomtype->title }}" width="100px" height="100px">
+                                                <p><button type="button" onclick="return confirm('Are you sure to delete the photo?')" class="btn btn-danger btn-sm m-2 delete-image" roomtype-image-id={{$img->id}}><i class="fa-solid fa-trash"></i></button></p>
                                             </td>
                                         @endforeach
                                     </tr>
@@ -83,5 +84,33 @@
 
     </div>
 </form>
+@section('scripts')
+    <script>
+        $(document).ready(function(){
+            $(".delete-image").on('click',function(){
+                // console.log("Hello delete");
+                var _img_id=$(this).attr('roomtype-image-id');
+                var vm=$(this);
+                $.ajax({
+                    url:"{{url('admin/roomtypeimage/"+_img_id+"/delete')}}",
+                    type:"get",
+                    dataType:"json",
+                    beforesend:function(){
+                        vm.addclass('disabled');
+                    }
+                    success:function(res){
+                        console.log('res');
+                        $(".imgcol"+_img_id).remove();
+                        vm.removeclass('disabled');
 
+                    }
+                    error:function(err){
+
+                    }
+                })
+
+            })
+        })
+    </script>
+@endsection
 @endsection

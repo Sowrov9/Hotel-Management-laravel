@@ -56,7 +56,7 @@
         {{-- Customer Master --}}
         <li>
             <a class="has-arrow" href="javascript:;">
-                <div class="parent-icon icon-color-11"><i class="fa-solid fa-users"></i></i>
+                <div class="parent-icon icon-color-11"><i class="fa-solid fa-users"></i>
                 </div>
                 <div class="menu-title">Customers</div>
             </a>
@@ -64,6 +64,35 @@
                 <li> <a href="{{url('admin/customer/create')}}"><i class="bx bx-right-arrow-alt"></i>Add New</a>
                 </li>
                 <li> <a href="{{url('admin/customer')}}"><i class="bx bx-right-arrow-alt"></i>View All</a>
+                </li>
+            </ul>
+        </li>
+        {{-- Department Menu --}}
+        <li>
+            <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon icon-color-11"><i class="fa-solid fa-building"></i>
+                </div>
+                <div class="menu-title">Departments</div>
+            </a>
+            <ul>
+                <li> <a href="{{url('admin/department/create')}}"><i class="bx bx-right-arrow-alt"></i>Add New</a>
+                </li>
+                <li> <a href="{{url('admin/department')}}"><i class="bx bx-right-arrow-alt"></i>View All</a>
+                </li>
+            </ul>
+        </li>
+
+        {{-- Staff Menu --}}
+        <li>
+            <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon icon-color-11"><i class="fa-solid fa-person-cane"></i>
+                </div>
+                <div class="menu-title">Staff</div>
+            </a>
+            <ul>
+                <li> <a href="{{url('admin/staff/create')}}"><i class="bx bx-right-arrow-alt"></i>Add New</a>
+                </li>
+                <li> <a href="{{url('admin/staff')}}"><i class="bx bx-right-arrow-alt"></i>View All</a>
                 </li>
             </ul>
         </li>

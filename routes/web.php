@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomtypeController;
+use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -39,6 +41,14 @@ Route::resource("admin/customer",CustomerController::class);
 
 //roomtype image delete
 Route::get("admin/roomtypeimage/delete/{id}",[RoomtypeController::class,'destroy_img']);
+
+// department route
+Route::get("admin/department/{id}/delete",[DepartmentController::class,'destroy']);
+Route::resource("admin/department",DepartmentController::class);
+
+// Staff route
+Route::get("admin/staff/{id}/delete",[StaffController::class,'destroy']);
+Route::resource("admin/staff",StaffController::class);
 
 
 require __DIR__.'/auth.php';

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RoomType;
 use App\Models\Roomtypeimage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RoomtypeController extends Controller
 {
@@ -125,16 +126,41 @@ class RoomtypeController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title'=>'required',
+            'title' => 'required',
+            'price' => 'required|numeric',
+            'imgs' => 'sometimes|array', // Allow imgs to be missing instead of nullable
+            'imgs.*' => 'image|mimes:jpeg,png,jpg,gif' // Validate each file individually
+
         ]);
         $roomtype= RoomType::find($id);
         $roomtype->title=$request->title;
         $roomtype->price=$request->price;
         $roomtype->details=$request->details;
-        $roomtype=$roomtype->save();
-        if($roomtype){
-            return redirect("admin/roomtype")->with("success","Data successfully updated");
+        $roomtype->save();
+
+        if($request->hasFile('imgs')){
+            foreach ($request->file('imgs') as $img) {
+                $typename = str_replace(' ', '_', $request->title); // Replace spaces with underscores
+                $extension = $img->getClientOriginalExtension(); // Get file extension
+
+                // Generate a unique filename
+                $imgname = $typename . '_' . time() . '_' . uniqid() . '.' . $extension;
+
+                // Move file to the storage path
+                $img->move(public_path('storage/images/'), $imgname);
+
+                // Save image details to database
+                $imgdata = new Roomtypeimage();
+                $imgdata->room_type_id = $roomtype->id;
+                $imgdata->img_src = $imgname; // Store only the filename
+                $imgdata->img_alt = $request->title;
+                $imgdata->save();
+            }
         }
+
+
+            return redirect("admin/roomtype/".$roomtype->id)->with("success","Data successfully updated");
+
     }
 
     /**
@@ -166,6 +192,14 @@ public function destroy_img($img_id)
     if (!$roomtypeimage) {
         return redirect()->back()->with('error', 'Room type not found.');
     }
+    // Define the image path in the public directory
+    $imagePath = public_path('storage/images/' . $roomtypeimage->img_src);
+
+    // Check if the file exists, then delete it
+    if (file_exists($imagePath)) {
+        unlink($imagePath);
+    }
+
 
     // Delete the record
     $roomtypeimage->delete();

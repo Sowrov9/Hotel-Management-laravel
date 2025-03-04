@@ -22,6 +22,7 @@
                         <th>Title</th>
                         <th>Price</th>
                         <th>Details</th>
+                        <th>Gallery Images</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -33,6 +34,7 @@
                                 <td>{{$roomtype->title}}</td>
                                 <td>{{$roomtype->price}}</td>
                                 <td>{{$roomtype->details}}</td>
+                                <td>{{count($roomtype->roomtypeimages)}}</td>
                                 <td>
                                     <a href="{{url('admin/roomtype/'.$roomtype->id)}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                                     <a href="{{url('admin/roomtype/'.$roomtype->id.'/edit')}}" class="btn btn-secondary"> <i class="fa fa-edit"></i></a>

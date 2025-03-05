@@ -49,9 +49,9 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label>Salary_type: </label> 
-                                    <input type="radio" name="salary_type" id="daily">Daily
-                                    <input type="radio" name="salary_type" id="monthly">Monthly
+                                    <label>Salary_type: </label>
+                                    <input type="radio" name="salary_type" id="daily" value="Daily">Daily
+                                    <input type="radio" name="salary_type" id="monthly" value="Monthly">Monthly
                                     @error('salary_type')
                                         <span style="color: red">{{$message}}</span>
                                     @enderror

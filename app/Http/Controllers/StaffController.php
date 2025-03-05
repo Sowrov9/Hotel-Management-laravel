@@ -35,20 +35,30 @@ class StaffController extends Controller
         $request->validate([
             'name'=>'required|min:3',
             'department_id'=>'required',
-            'photo'=>'required|mimes:png,jpg,jpeg',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4096',
             'bio'=>'required',
             'salary_type'=>'required',
             'salary_amount'=>'required',
         ]);
+        if ($request->hasFile('photo')) {
+            $file=$request->file('photo');
+            $staffname=str_replace(' ','_',$request->name);
+            $extension=$file->getClientOriginalExtension();
+            $photoname=$staffname.'_'. time() .'_'. uniqid() .'.'. $extension;
+            $file->move(public_path('storage/images'),$photoname);
+        } else {
+            $photoname=null;
+        }
+
         $staff=new Staff();
         $staff->name=$request->name;
         $staff->department_id=$request->department_id;
-        $staff->photo=$request->photo;
+        $staff->photo=$photoname;
         $staff->bio=$request->bio;
         $staff->salary_type=$request->salary_type;
         $staff->salary_amount=$request->salary_amount;
         $staff->save();
-        if($staff){
+        if($staff->save()){
             return redirect("admin/staff")->with("success","staff Successfully created");
         }
     }
@@ -58,7 +68,7 @@ class StaffController extends Controller
      */
     public function show( $id)
     {
-        $staff= staff::find($id);
+        $staff= Staff::find($id);
         return view("pages.erp.staff.show",compact("staff"));
     }
 
@@ -67,9 +77,9 @@ class StaffController extends Controller
      */
     public function edit(string $id)
     {
-        $department= Department::all();
+        $departments= Department::all();
         $staff=Staff::find($id);
-        return view("pages.erp.staff.update",compact("staff","department"));
+        return view("pages.erp.staff.update",compact("staff","departments"));
     }
 
     /**

@@ -1,7 +1,7 @@
 @extends('layout.erp.app')
 @section('page')
     <div class="card-title">
-        <h4 class="mb-0">Show Details</h4>
+        <h4 class="mb-0">Show {{$staff->name}} Details</h4>
         <a href="{{ url('admin/staff') }}" class="btn btn-primary mb-2 btn-sm float-right">View all</a>
     </div>
     <div class="table-responsive">
@@ -17,12 +17,11 @@
                 </tr>
                 <tr>
                     <th>Department</th>
-                    <td>{{ $staff->department > title }}</td>
+                    <td>{{ $staff->department->title }}</td>
                 </tr>
                 <tr>
                     <th>Photo</th>
-                    <img src="{{ asset('storage/images/' . $img->img_src) }}" alt="{{ $staff->name }}" width="100px" height="100px">
-
+                    <td> <img src="{{ asset('storage/images/'.$staff->photo) }}" alt="{{ $staff->photo }}" width="100px" height="100px"></td>
                 </tr>
                 <tr>
                     <th>Bio</th>

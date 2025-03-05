@@ -2,7 +2,7 @@
 @section('page')
 <div class="card">
     @if (session('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success" id="success-alert">
             {{ session('success') }}
         </div>
     @endif
@@ -67,6 +67,12 @@
             buttons: ['copy', 'excel', 'pdf', 'print', 'colvis']
         });
         table.buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+
+        $(document).ready(function() {
+                setTimeout(function() {
+                    $('#success-alert').fadeOut('slow');
+                }, 3000); // 3 seconds
+            });
     });
 </script>
 <!-- App JS -->

@@ -1,11 +1,27 @@
 @extends("layout.erp.app")
 @section('page')
 <div class="card">
-    @if (session('success'))
+    {{-- @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
+    @endif --}}
+    @if (session('success'))
+        <div class="alert alert-success" id="success-alert">
+            {{ session('success') }}
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                setTimeout(function() {
+                    $('#success-alert').fadeOut('slow');
+                }, 3000); // 3 seconds
+            });
+        </script>
     @endif
+
+
 
     <div class="card-body">
         <div class="card-title">

@@ -2,7 +2,7 @@
 @section('page')
 <div class="card">
     @if (session('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success" id="success-alert">
             {{ session('success') }}
         </div>
     @endif
@@ -35,7 +35,9 @@
                                 <td>{{$staff->id}}</td>
                                 <td>{{$staff->name}}</td>
                                 <td>{{$staff->department->title}}</td>
-                                <td>{{$staff->photo}}</td>
+                                <td>
+                                    <img src="{{ asset('storage/images/' . $staff->photo) }}" alt="" width="70" height="70">
+                                </td>
                                 <td>{{$staff->bio}}</td>
                                 <td>{{$staff->salary_type}}</td>
                                 <td>{{$staff->salary_amount}}</td>
@@ -79,6 +81,12 @@
             buttons: ['copy', 'excel', 'pdf', 'print', 'colvis']
         });
         table.buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+
+        $(document).ready(function() {
+                setTimeout(function() {
+                    $('#success-alert').fadeOut('slow');
+                }, 3000); // 3 seconds
+            });
     });
 </script>
 <!-- App JS -->

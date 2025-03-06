@@ -87,14 +87,34 @@ class StaffController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'title'=>'required',
+         $request->validate([
+            'name'=>'required|min:3',
+            'department_id'=>'required',
+            // 'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4096',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif',
+            'bio'=>'required',
+            'salary_type'=>'required',
+            'salary_amount'=>'required',
         ]);
-        $staff=staff::find($id);
-        $staff->title=$request->title;
-        $staff->staff_type_id=$request->staff_type_id;
+        if ($request->hasFile('photo')) {
+            $file=$request->file('photo');
+            $staffname=str_replace(' ','_',$request->name);
+            $extension=$file->getClientOriginalExtension();
+            $photoname=$staffname.'_'. time() .'_'. uniqid() .'.'. $extension;
+            $file->move(public_path('storage/images'),$photoname);
+        } else {
+           $photoname=$request->prev_photo;
+        }
+
+        $staff=Staff::find($id);
+        $staff->name=$request->name;
+        $staff->department_id=$request->department_id;
+        $staff->photo=$photoname;
+        $staff->bio=$request->bio;
+        $staff->salary_type=$request->salary_type;
+        $staff->salary_amount=$request->salary_amount;
         $staff->save();
-        if($staff){
+        if($staff->save()){
             return redirect("admin/staff")->with("success","staff Successfully updated");
         }
     }

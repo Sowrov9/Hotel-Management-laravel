@@ -1,6 +1,6 @@
 @extends('layout.erp.app')
 @section('page')
-    <form action="{{ url('admin/staff/'.$staff->id) }}" method="POST">
+    <form action="{{ url('admin/staff/'.$staff->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="row">
@@ -26,9 +26,10 @@
                             <div class="form-group">
                                 <label>Select Department</label>
                                 <select name="department_id" id="">
-                                    <option value="{{$staff->department->id}}">{{$staff->department->title}}</option>
+                                    {{-- <option value="{{$staff->department->id}}">{{$staff->department->title}}</option> --}}
+                                    <option value="0">--Select Department--</option>
                                     @forelse ($departments as $department)
-                                        <option value="{{$department->id}}">{{$department->title}}</option>
+                                        <option @if ($staff->id==$department->id) selected  @endif value="{{$department->id}}">{{$department->title}}</option>
                                     @empty
                                         <div>data empty</div>
                                     @endforelse
@@ -61,14 +62,27 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label>Salary_type: </label>
-                                <input type="radio" name="salary_type" id="daily" value="Daily">Daily
-                                <input type="radio" name="salary_type" id="monthly" value="Monthly">Monthly
+                                <input type="radio" name="salary_type" @if ($staff->salary_type=='daily') checked  @endif id="daily" value="daily">Daily
+                                <input type="radio" name="salary_type" @if ($staff->salary_type=='monthly') checked  @endif id="monthly" value="monthly">Monthly
                                 @error('salary_type')
                                     <span style="color: red">{{$message}}</span>
                                 @enderror
+                            </div> --}}
+                            <div class="form-group">
+                                <label>Salary Type: </label>
+                                <input type="radio" name="salary_type" id="daily" value="daily"
+                                    {{ old('salary_type', $staff->salary_type) == 'daily' ? 'checked' : '' }}> Daily
+
+                                <input type="radio" name="salary_type" id="monthly" value="monthly"
+                                    {{ old('salary_type', $staff->salary_type) == 'monthly' ? 'checked' : '' }}> Monthly
+
+                                @error('salary_type')
+                                    <span style="color: red">{{ $message }}</span>
+                                @enderror
                             </div>
+
                             <div class="form-group">
                                 <label>Salary_amount</label>
                                 <input type="number" name="salary_amount" value="{{$staff->salary_amount}}" class="form-control radius-30" />
@@ -85,17 +99,16 @@
 
         </div>
     </form>
-    @section('script')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $('#photoInput').change(function(e){
-                let reader = new FileReader();
-                reader.onload = function(event){
-                    $('#photoPreview').attr('src', event.target.result);
-                };
-                reader.readAsDataURL(e.target.files[0]);
-            });
+    $(document).ready(function(){
+        $('#photoInput').change(function(e){
+            let reader = new FileReader();
+            reader.onload = function(event){
+                $('#photoPreview').attr('src', event.target.result);
+            };
+            reader.readAsDataURL(e.target.files[0]);
         });
-        </script>
-    @endsection
+    });
+ </script>
 @endsection

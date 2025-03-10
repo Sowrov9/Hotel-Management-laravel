@@ -44,6 +44,7 @@
                                 <td>
                                     <a href="{{url('admin/staff/'.$staff->id)}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                                     <a href="{{url('admin/staff/'.$staff->id.'/edit')}}" class="btn btn-secondary"> <i class="fa fa-edit"></i></a>
+                                    <a href="{{url('admin/staff/payment/'.$staff->id)}}" class="btn btn-dark"> <i class="fa fa-credit-card"></i></a>
                                     <a onclick="return confirm('Are you sure to delete the data?')" href="{{url('admin/staff/'.$staff->id.'/delete')}}" class="btn btn-danger"> <i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>

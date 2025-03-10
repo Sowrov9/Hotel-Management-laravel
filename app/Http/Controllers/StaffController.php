@@ -128,4 +128,9 @@ class StaffController extends Controller
         $staff->delete();
         return redirect("admin/staff")->with("success","staff Successfully deleted");
     }
+
+    // Add Staff Payment
+    public function add_payment($staff_id){
+        return view("pages.erp.staffpayment.create",compact('staff_id'));
+    }
 }

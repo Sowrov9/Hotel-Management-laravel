@@ -52,5 +52,7 @@ Route::resource("admin/staff",StaffController::class);
 // Staff Payment route
 Route::get("admin/staff/payment/{id}",[StaffController::class,'all_payment']);
 Route::get("admin/staff/payment/{id}/add",[StaffController::class,'add_payment']);
+Route::post("admin/staff/payment/{id}",[StaffController::class,'save_payment']);
+Route::get("admin/staff/payment/{id}/{staff_id}/delete",[StaffController::class,'delete_payment']);
 
 require __DIR__.'/auth.php';

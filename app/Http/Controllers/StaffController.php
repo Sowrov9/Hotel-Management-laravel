@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use App\Models\Staff;
+use App\Models\StaffPayment;
 use Illuminate\Http\Request;
 
 class StaffController extends Controller
@@ -124,13 +125,40 @@ class StaffController extends Controller
      */
     public function destroy(string $id)
     {
-        $staff=staff::find($id);
+        $staff=Staff::find($id);
         $staff->delete();
         return redirect("admin/staff")->with("success","staff Successfully deleted");
     }
 
-    // Add Staff Payment
+    // Staff Payment
+    public function all_payment($staff_id){
+        $payments=StaffPayment::where("staff_id",$staff_id)->get();
+        $staff=Staff::find($staff_id);
+        return view("pages.erp.staffpayment.index",compact('payments','staff','staff_id'));
+    }
     public function add_payment($staff_id){
-        return view("pages.erp.staffpayment.create",compact('staff_id'));
+        $staff=Staff::find($staff_id);
+        return view("pages.erp.staffpayment.create",compact('staff_id','staff'));
+    }
+    public function save_payment(Request $request, $staff_id){
+        $request->validate([
+            'amount'=>'required',
+            'payment_date'=>'required',
+        ]);
+        $staff_payment=new StaffPayment();
+        $staff_payment->staff_id=$staff_id;
+        $staff_payment->amount=$request->amount;
+        $staff_payment->payment_date=$request->payment_date;
+        $staff_payment->save();
+        if($staff_payment->save()){
+            return redirect("admin/staff/payment/".$staff_id)->with("success","staff Successfully created");
+        }
+    }
+    public function delete_payment($id,$staff_id)
+    {
+        // $staff_payment=Staff::find($id);
+        // $staff_payment->delete();
+        StaffPayment::where('id',$id)->delete();
+        return redirect("admin/staff/payment/".$staff_id)->with("success","staff Successfully deleted");
     }
 }

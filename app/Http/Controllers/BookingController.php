@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
@@ -30,7 +32,25 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'customer_id'=>'required',
+            'room_id'=>'required',
+            'checkin_date'=>'required',
+            'checkout_date'=>'required',
+            'total_adult'=>'required',
+        ]);
+        $booking=new Booking();
+        $booking->customer_id=$request->customer_id;
+        $booking->room_id=$request->room_id;
+        $booking->checkin_date=$request->checkin_date;
+        $booking->checkout_date=$request->checkout_date;
+        $booking->total_adult=$request->total_adult;
+        $booking->total_children=$request->total_children;
+
+        $booking->save();
+        if($booking){
+            return redirect("admin/booking")->with("success","Room Successfully created");
+        }
     }
 
     /**
@@ -63,5 +83,9 @@ class BookingController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function available_rooms(Request $request, $checkin_date){
+        $arooms=DB::select("select * from rooms where id not in(select room_id from bookings where '$checkin_date' between checkin_date and checkout_date)");
+        return response()->json(['data'=>$arooms]);
     }
 }

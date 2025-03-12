@@ -32,14 +32,14 @@
 
                                 <div class="form-group">
                                     <label>Checkin Date</label>
-                                    <input type="date" name="checkin_date" value="{{old('checkin_date')}}" class="form-control radius-30" />
+                                    <input type="date" name="checkin_date" value="{{old('checkin_date')}}" class="form-control radius-30 checkin_date" />
                                     @error('checkin_date')
                                         <span style="color: red">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label>Checkout Date</label>
-                                    <input type="date" name="checkout_date" value="{{old('checkout_date')}}" class="form-control radius-30" />
+                                    <input type="date" name="checkout_date" value="{{old('checkout_date')}}" class="form-control radius-30 checkout_date" />
                                     @error('checkout_date')
                                         <span style="color: red">{{$message}}</span>
                                     @enderror
@@ -47,11 +47,11 @@
 
                                 <div class="form-group">
                                     <label>Available Rooms</label>
-                                    <select name="room_id" id="">
-                                        <option value="0">--Select Room--</option>
-                                        
+                                    <select name="room_id" id="" class="form-control radius-30 room-list">
+                                        <option value="0">-- Available Rooms --</option>
+
                                     </select>
-                                    @error('customer_id')
+                                    @error('room_id')
                                             <span style="color: red">{{$message}}</span>
                                     @enderror
                                 </div>
@@ -80,4 +80,34 @@
 
         </div>
     </form>
+
+    @section('scripts')
+        <script class="text/javascript">
+            $(document).ready(function(){
+                $(".checkin_date").on('blur',function(){
+                    var _checkindate=$(this).val();
+                    // console.log(_checkindate);
+                    $.ajax({
+                        type: "GET",
+                        url: "{{url('admin/booking')}}/available-rooms/"+_checkindate,
+                        // data: "{empid: " + empid + "}",
+                        // contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        beforeSend:function(){
+                            $(".room-list").html('<option>-- Loading --</option>')
+                        },
+                        success: function(result){
+                            // console.log(result);
+                            var _html="";
+                            $.each(result.data,function(index,row){
+                                _html+='<option value="'+row.id+'">'+row.title+'</option>'
+                            })
+                            $(".room-list").html(_html);
+                        }
+                    });
+
+                })
+            })
+        </script>
+    @endsection
 @endsection

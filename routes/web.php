@@ -57,6 +57,7 @@ Route::post("admin/staff/payment/{id}",[StaffController::class,'save_payment']);
 Route::get("admin/staff/payment/{id}/{staff_id}/delete",[StaffController::class,'delete_payment']);
 // booking route
 Route::get("admin/booking/{id}/delete",[BookingController::class,'destroy']);
+Route::get("admin/booking/available-rooms/{checkin_date}",[BookingController::class,'available_rooms']);
 Route::resource("admin/booking",BookingController::class);
 
 require __DIR__.'/auth.php';

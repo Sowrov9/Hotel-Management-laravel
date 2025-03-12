@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ProfileController;
@@ -54,5 +55,8 @@ Route::get("admin/staff/payment/{id}",[StaffController::class,'all_payment']);
 Route::get("admin/staff/payment/{id}/add",[StaffController::class,'add_payment']);
 Route::post("admin/staff/payment/{id}",[StaffController::class,'save_payment']);
 Route::get("admin/staff/payment/{id}/{staff_id}/delete",[StaffController::class,'delete_payment']);
+// booking route
+Route::get("admin/booking/{id}/delete",[BookingController::class,'destroy']);
+Route::resource("admin/booking",BookingController::class);
 
 require __DIR__.'/auth.php';

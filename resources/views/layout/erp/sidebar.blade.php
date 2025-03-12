@@ -96,6 +96,20 @@
                 </li>
             </ul>
         </li>
+        {{-- Booking Menu --}}
+        <li>
+            <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon icon-color-11"><i class="fa-solid fa-calendar-check"></i>
+                </div>
+                <div class="menu-title">Booking</div>
+            </a>
+            <ul>
+                <li> <a href="{{url('admin/booking/create')}}"><i class="bx bx-right-arrow-alt"></i>Add New</a>
+                </li>
+                <li> <a href="{{url('admin/booking')}}"><i class="bx bx-right-arrow-alt"></i>View All</a>
+                </li>
+            </ul>
+        </li>
         {{-- logout menu  --}}
         <a href="{{url('admin/logout')}}" class="has-arrow">
             <div class="parent-icon icon-color-1"><i class="fa-solid fa-right-from-bracket"></i>

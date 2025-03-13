@@ -4,7 +4,7 @@
             <a href="javascript:;" class="toggle-btn">	<i class="bx bx-menu"></i>
             </a>
         </div>
-        <div class="flex-grow-1 search-bar">
+        {{-- <div class="flex-grow-1 search-bar">
             <div class="input-group">
                 <div class="input-group-prepend search-arrow-back">
                     <button class="btn btn-search-back" type="button"><i class="bx bx-arrow-back"></i>
@@ -16,7 +16,7 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="right-topbar ml-auto">
             <ul class="navbar-nav">
                 <li class="nav-item search-btn-mobile">
@@ -297,7 +297,7 @@
                                 <p class="user-name mb-0">Jessica Doe</p>
                                 <p class="designattion mb-0">Available</p>
                             </div>
-                            <img src="{{asset('assets/images/icons/shirt.png')}}" class="user-img" alt="user avatar">
+                            <img src="{{asset('assets/images/profile.jpeg')}}" class="user-img" alt="user avatar">
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">	<a class="dropdown-item" href="javascript:;"><i
@@ -310,7 +310,7 @@
                                 class="bx bx-wallet"></i><span>Earnings</span></a>
                         <a class="dropdown-item" href="javascript:;"><i
                                 class="bx bx-cloud-download"></i><span>Downloads</span></a>
-                        <div class="dropdown-divider mb-0"></div>	<a class="dropdown-item" href="javascript:;"><i
+                        <div class="dropdown-divider mb-0"></div>	<a class="dropdown-item" href="{{url('admin/logout')}}" onclick="return confirm('Are you sure to Logout?')"><i
                                 class="bx bx-power-off"></i><span>Logout</span></a>
                     </div>
                 </li>

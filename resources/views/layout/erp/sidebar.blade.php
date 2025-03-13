@@ -4,7 +4,7 @@
             <img src="{{asset('assets')}}/images/logo-icon.png" class="logo-icon-2" alt="" />
         </div>
         <div>
-            <h4 class="logo-text">Syndash</h4>
+            <h4 class="logo-text">Sleepy</h4>
         </div>
         <a href="javascript:;" class="toggle-btn ml-auto"> <i class="bx bx-menu"></i>
         </a>
@@ -12,17 +12,11 @@
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li>
-            <a href="javascript:;" class="has-arrow">
+            <a href="admin" class="has-arrow">
                 <div class="parent-icon icon-color-1"><i class="bx bx-home-alt"></i>
                 </div>
                 <div class="menu-title">Dashboard</div>
             </a>
-            <ul>
-                <li> <a href="index.html"><i class="bx bx-right-arrow-alt"></i>Analytics</a>
-                </li>
-                <li> <a href="index2.html"><i class="bx bx-right-arrow-alt"></i>Sales</a>
-                </li>
-            </ul>
         </li>
         <li class="menu-label">Masters </li>
         {{-- Roomtype Master --}}
@@ -32,6 +26,7 @@
                 </div>
                 <div class="menu-title">Room Types</div>
             </a>
+
             <ul>
                 <li> <a href="{{url('admin/roomtype/create')}}"><i class="bx bx-right-arrow-alt"></i>Add New</a>
                 </li>
@@ -111,7 +106,7 @@
             </ul>
         </li>
         {{-- logout menu  --}}
-        <a href="{{url('admin/logout')}}" class="has-arrow">
+        <a href="{{url('admin/logout')}}" onclick="return confirm('Are you sure to LogOut?')" class="has-arrow">
             <div class="parent-icon icon-color-1"><i class="fa-solid fa-right-from-bracket"></i>
             </div>
             <div class="menu-title">Log Out</div>

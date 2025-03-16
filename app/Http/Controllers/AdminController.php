@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
@@ -37,5 +38,18 @@ class AdminController extends Controller
     public function logout(){
         session()->forget(["adminData"]);
         return redirect("admin/login");
+    }
+
+    //dashboard
+    public function dashboard(){
+        $bookings=Booking::selectRaw('count(id) as total_checkin,checkin_date')->groupBy('checkin_date')->get();
+        $bookings=Booking::selectRaw('count(id) as total_checkout,checkout_date')->groupBy('checkout_date')->get();
+        $checkin=[];
+        $checkout=[];
+        foreach ($bookings as $booking) {
+            $checkin=$booking['total_checkin'];
+            $checkout=$booking['total_checkout'];
+        }
+        return view("pages.dashboard",compact('checkin','checkout'));
     }
 }

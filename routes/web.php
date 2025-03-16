@@ -18,9 +18,12 @@ Route::get('admin/login',[AdminController::class,'login']);
 Route::post('admin/login',[AdminController::class,'login_check']);
 Route::get('admin/logout',[AdminController::class,'logout']);
 
-Route::get('/admin', function () {
-    return view('pages.dashboard');
-});//->middleware(['auth', 'verified'])->name('dashboard');
+//Dashboard route
+Route::get('admin',[AdminController::class,'dashboard']);
+
+// Route::get('admin', function () {
+//     return view('pages.dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

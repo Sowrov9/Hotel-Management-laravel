@@ -55,15 +55,16 @@
         </div>
     </div>
     <!--end row-->
+
     <div class="row">
         <div class="col-12 col-lg-8">
             <div class="card radius-15">
                 <div class="card-header border-bottom-0">
                     <div class="d-lg-flex align-items-center">
                         <div>
-                            <h5 class="mb-lg-0">New VS Returning Visitors</h5>
+                            <h5 class="mb-lg-0">Checkin VS Checkout</h5>
                         </div>
-                        <div class="ml-lg-auto mb-2 mb-lg-0">
+                        {{-- <div class="ml-lg-auto mb-2 mb-lg-0">
                             <div class="btn-group-round">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-white">This Month</button>
@@ -74,7 +75,7 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="card-body">
@@ -540,5 +541,10 @@
             </div>
         </div>
     </div>
-
+@section('script')
+    <script>
+        var _checkin={!! json_encode($checkin) !!};
+        var _checkout={!! json_encode($checkout) !!};
+    </script>
+@endsection
 @endsection

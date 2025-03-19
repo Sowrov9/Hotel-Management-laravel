@@ -222,11 +222,11 @@ $(function () {
 	// chart 4
 	var options = {
 		series: [{
-			name: 'New Visitors',
-			data: [94, 55, 57, 56, 61, 58, 63, 60, 66, 75]
+			name: 'CheckIn',
+			data:_checkin,
 		}, {
-			name: 'Returning Visitors',
-			data: [-76, -85, -101, -98, -87, -105, -91, -114, -94, -105]
+			name: 'CheckOut',
+			data: _checkout,
 		}],
 		chart: {
 			foreColor: '#9a9797',
@@ -259,7 +259,7 @@ $(function () {
 		},
 		colors: ["#6236af", "#f02769"],
 		xaxis: {
-			categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+			categories: checkin_date,
 		},
 		fill: {
 			opacity: 1

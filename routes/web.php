@@ -60,4 +60,6 @@ Route::get("admin/booking/{id}/delete",[BookingController::class,'destroy']);
 Route::get("admin/booking/available-rooms/{checkin_date}",[BookingController::class,'available_rooms']);
 Route::resource("admin/booking",BookingController::class);
 
+// Route::get('rana', [RoomController::class,'rooms']);
+
 require __DIR__.'/auth.php';

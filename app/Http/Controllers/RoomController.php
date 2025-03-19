@@ -91,4 +91,13 @@ class RoomController extends Controller
         $room->delete();
         return redirect("admin/room")->with("success","Room Successfully deleted");
     }
+
+
+    public function rooms()
+    {
+        $rooms=Room::all();
+        return response()->json(["rooms" => $rooms]);
+
+    }
+
 }

@@ -15,4 +15,10 @@ class Booking extends Model
     function room(){
         return $this->belongsTo(Room::class);
     }
+    function roomType(){
+        return $this->belongsTo(RoomType::class);
+    }
+    // function roomType(){
+    //     return $this->hasOneThrough(RoomType::class, Room::class, 'id', 'id', 'room_id', 'room_type_id');
+    // }
 }

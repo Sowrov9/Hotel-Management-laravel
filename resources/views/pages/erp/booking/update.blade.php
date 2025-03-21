@@ -66,7 +66,8 @@
                             <div class="form-group">
                                 <label>Available Rooms</label><span class="text-danger">*</span>
                                 <select name="room_id" id="room_list" class="form-control radius-30">
-                                    <option value="0">-- Select Available Room --</option>
+                                    {{-- <option value="0">-- Select Available Room --</option> --}}
+                                    <option value="{{$booking->room->id}}">{{$booking->room->title}}</option>
                                 </select>
                                 @error('room_id')
                                     <span style="color: red">{{$message}}</span>
@@ -101,18 +102,42 @@
 
     </div>
 </form>
- <!-- jQuery for Live Image Preview -->
- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- <script>
- $(document).ready(function(){
-     $('#photoInput').change(function(e){
-         let reader = new FileReader();
-         reader.onload = function(event){
-             $('#photoPreview').attr('src', event.target.result);
-         };
-         reader.readAsDataURL(e.target.files[0]);
-     });
- });
- </script>
+ <!-- jQuery for Live fetch room of selected room type -->
+ @section('scripts')
+        <script class="text/javascript">
+            $(document).ready(function(){
+                function fetchRooms() {
+                    var checkin_date = $(".checkin_date").val();
+                    var checkout_date = $(".checkout_date").val();
+                    var room_type_id = $("#room_type_id").val();
+
+                    if (checkin_date && checkout_date && room_type_id != "0") {
+                        $.ajax({
+                            type: "GET",
+                            url: "{{url('admin/booking')}}/available-rooms",
+                            data: {
+                                checkin_date: checkin_date,
+                                checkout_date: checkout_date,
+                                room_type_id: room_type_id
+                            },
+                            dataType: "json",
+                            // beforeSend: function(){
+                            //     $("#room_list").html('<option>-- Loading --</option>');
+                            // },
+                            success: function(result){
+                                var _html = '<option value="0">-- Select Available Room --</option>';
+                                $.each(result.data, function(index, row){
+                                    _html += '<option value="'+row.id+'">'+row.title+'</option>';
+                                });
+                                $("#room_list").html(_html);
+                            }
+                        });
+                    }
+                }
+
+                $(".checkin_date, .checkout_date, #room_type_id").on('change', fetchRooms);
+            });
+        </script>
+    @endsection
 
 @endsection

@@ -35,11 +35,31 @@ class RoomController extends Controller
     {
         $request->validate([
             'title'=>'required',
+            'bed'=>'required',
+            'bath'=>'required',
+            'balcony'=>'required',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif',
+            'price'=>'required',
         ]);
         $room=new Room();
         $room->title=$request->title;
         $room->room_type_id	=$request->room_type_id;
+        $room->bed=$request->bed;
+        $room->bath=$request->bath;
+        $room->balcony=$request->balcony;
+        $room->price=$request->price;
 
+        if ($request->hasFile('photo')) {
+            $photo=$request->file('photo');
+            $typename=str_replace(' ','_',$request->title); // Replace spaces with underscores
+            $extension = $photo->getClientOriginalExtension(); // Get file extension
+
+            // Generate a unique filename
+            $photoname = $typename . '_' . time() . '_' . uniqid() . '.' . $extension;
+
+            // Move file to the storage path
+            $photo->move(public_path('storage/images/'), $photoname);
+        }
         $room->save();
         if($room){
             return redirect("admin/room")->with("success","Room Successfully created");
@@ -72,10 +92,30 @@ class RoomController extends Controller
     {
         $request->validate([
             'title'=>'required',
+            'bed'=>'required',
+            'bath'=>'required',
+            'balcony'=>'required',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif',
+            'price'=>'required',
         ]);
         $room=Room::find($id);
         $room->title=$request->title;
         $room->room_type_id=$request->room_type_id;
+        $room->bed=$request->bed;
+        $room->bath=$request->bath;
+        $room->balcony=$request->balcony;
+        $room->price=$request->price;
+        if ($request->hasFile('photo')) {
+            $photo=$request->file('photo');
+            $typename=str_replace(' ','_',$request->title); // Replace spaces with underscores
+            $extension = $photo->getClientOriginalExtension(); // Get file extension
+
+            // Generate a unique filename
+            $photoname = $typename . '_' . time() . '_' . uniqid() . '.' . $extension;
+
+            // Move file to the storage path
+            $photo->move(public_path('storage/images/'), $photoname);
+        }
         $room->save();
         if($room){
             return redirect("admin/room")->with("success","Room Successfully updated");
@@ -90,14 +130,6 @@ class RoomController extends Controller
         $room=Room::find($id);
         $room->delete();
         return redirect("admin/room")->with("success","Room Successfully deleted");
-    }
-
-
-    public function rooms()
-    {
-        $rooms=Room::all();
-        return response()->json(["rooms" => $rooms]);
-
     }
 
 }

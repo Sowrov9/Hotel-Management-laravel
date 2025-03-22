@@ -19,6 +19,29 @@
                 <th>Room Type</th>
                 <td>{{$room->roomtype->title}}</td>
             </tr>
+            <tr>
+                <th>Bed</th>
+                <td>{{$room->bed}}</td>
+            </tr>
+            <tr>
+                <th>Bath</th>
+                <td>{{$room->bath}}</td>
+            </tr>
+            <tr>
+                <th>Balcony</th>
+                <td>{{$room->balcony}}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td>
+                    <img src="{{ asset('storage/images') }} {{$room->photo}}" alt="{{ $room->title }}" width="100px" height="100px">
+
+                </td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{$room->price}}</td>
+            </tr>
         </thead>
     </table>
 </div>

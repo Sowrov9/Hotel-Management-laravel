@@ -26,7 +26,7 @@
 
                             <div class="form-group">
                                 <label>Select Room Type</label>
-                                <select name="room_type_id" id="">
+                                <select name="room_type_id" id="" class="form-control">
                                     <option value="$room->roomType->id">{{$room->roomType->title}}</option>
                                     @forelse ($roomtypes as $roomtype)
                                         <option value="{{$roomtype->id}}">{{$roomtype->title}}</option>
@@ -34,6 +34,44 @@
                                         <div>data empty</div>
                                     @endforelse
                                 </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Bed</label>
+                                <input type="number" name="bed" value="{{$room->bed}}" class="form-control radius-30" />
+                                @error('bed')
+                                    <span style="color: red">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Bath</label>
+                                <input type="number" name="bath" value="{{$room->bath}}" class="form-control radius-30" />
+                                @error('bath')
+                                    <span style="color: red">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Balcony</label>
+                                <input type="number" name="balcony" value="{{$room->balcony}}" class="form-control radius-30" />
+                                @error('balcony')
+                                    <span style="color: red">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Photo</label>
+                                <input type="file" name="photo" value="{{$room->photo}}" class="form-control radius-30" />
+                                <img src="{{ asset('storage/images/' . $room->photo) }}"
+                                                        alt="{{ $room->title }}" width="100px" height="100px">
+                                @error('photo')
+                                    <span style="color: red">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input type="number" name="price" value="{{$room->price}}" class="form-control radius-30" />
+                                @error('price')
+                                    <span style="color: red">{{$message}}</span>
+                                @enderror
                             </div>
 
                             <button type="submit" class="btn btn-primary px-5 radius-30">Update</button>

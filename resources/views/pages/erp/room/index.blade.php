@@ -21,6 +21,10 @@
                         <th>Id</th>
                         <th>Title</th>
                         <th>Room_type</th>
+                        <th>Bed</th>
+                        <th>Bath</th>
+                        <th>Balcony</th>
+                        <th>Price</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -31,6 +35,10 @@
                                 <td>{{$room->id}}</td>
                                 <td>{{$room->title}}</td>
                                 <td>{{$room->roomType->title}}</td>
+                                <td>{{$room->bed}}</td>
+                                <td>{{$room->bath}}</td>
+                                <td>{{$room->balcony}}</td>
+                                <td>{{$room->price}}</td>
                                 <td>
                                     <a href="{{url('admin/room/'.$room->id)}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                                     <a href="{{url('admin/room/'.$room->id.'/edit')}}" class="btn btn-secondary"> <i class="fa fa-edit"></i></a>
@@ -46,6 +54,10 @@
                         <th>Id</th>
                         <th>Title</th>
                         <th>Room_type</th>
+                        <th>Bed</th>
+                        <th>Bath</th>
+                        <th>Balcony</th>
+                        <th>Price</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>

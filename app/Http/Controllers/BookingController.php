@@ -83,7 +83,27 @@ class BookingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+        $request->validate([
+            'customer_id'=>'required',
+            'room_type_id'=>'required',
+            'room_id'=>'required',
+            'checkin_date'=>'required',
+            'checkout_date'=>'required',
+            'total_adult'=>'required',
+        ]);
+        $booking=Booking::find($id);
+        $booking->customer_id=$request->customer_id;
+        $booking->room_type_id=$request->room_type_id;
+        $booking->room_id=$request->room_id;
+        $booking->checkin_date=$request->checkin_date;
+        $booking->checkout_date=$request->checkout_date;
+        $booking->total_adult=$request->total_adult;
+        $booking->total_children=$request->total_children;
+
+        $booking->save();
+        if($booking){
+            return redirect("admin/booking")->with("success","Room Successfully Updated");
+        }
     }
 
     /**
@@ -91,7 +111,9 @@ class BookingController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $booking= Booking::find($id);
+        $booking->delete();
+        return redirect("admin/booking")->with('success','Booking Successfully deleted');
     }
     // public function available_rooms(Request $request, $checkin_date){
     //     $arooms=DB::select("select * from rooms where id not in(select room_id from bookings where '$checkin_date' between checkin_date and checkout_date)");

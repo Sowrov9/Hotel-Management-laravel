@@ -24,6 +24,7 @@
                         <th>Bed</th>
                         <th>Bath</th>
                         <th>Balcony</th>
+                        <th>Photo</th>
                         <th>Price</th>
                         <th>Action</th>
                     </tr>
@@ -38,6 +39,7 @@
                                 <td>{{$room->bed}}</td>
                                 <td>{{$room->bath}}</td>
                                 <td>{{$room->balcony}}</td>
+                                <td><img width="70" height="50" src="{{asset('storage/images/rooms/'.$room->photo) }}" alt=""></td>
                                 <td>{{$room->price}}</td>
                                 <td>
                                     <a href="{{url('admin/room/'.$room->id)}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
@@ -57,6 +59,7 @@
                         <th>Bed</th>
                         <th>Bath</th>
                         <th>Balcony</th>
+                        <th>Photo</th>
                         <th>Price</th>
                         <th>Action</th>
                     </tr>

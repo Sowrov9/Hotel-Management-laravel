@@ -7,6 +7,8 @@ use App\Models\Room;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
 
+use function Pest\Laravel\json;
+
 class RoomController extends Controller
 {
     /**
@@ -58,8 +60,12 @@ class RoomController extends Controller
             $photoname = $typename . '_' . time() . '_' . uniqid() . '.' . $extension;
 
             // Move file to the storage path
-            $photo->move(public_path('storage/images/'), $photoname);
+            $photo->move(public_path('storage/images/rooms'), $photoname);
         }
+        else{
+            $photoname=null;
+        }
+        $room->photo=$photoname;
         $room->save();
         if($room){
             return redirect("admin/room")->with("success","Room Successfully created");
@@ -82,6 +88,7 @@ class RoomController extends Controller
     {
         $roomtypes= RoomType::all();
         $room=Room::find($id);
+        // echo json_encode($room);
         return view("pages.erp.room.update",compact("room","roomtypes"));
     }
 
@@ -114,8 +121,9 @@ class RoomController extends Controller
             $photoname = $typename . '_' . time() . '_' . uniqid() . '.' . $extension;
 
             // Move file to the storage path
-            $photo->move(public_path('storage/images/'), $photoname);
+            $photo->move(public_path('storage/images/rooms'), $photoname);
         }
+        $room->photo=$photoname;
         $room->save();
         if($room){
             return redirect("admin/room")->with("success","Room Successfully updated");

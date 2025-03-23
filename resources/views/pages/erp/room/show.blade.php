@@ -34,7 +34,7 @@
             <tr>
                 <th>Photo</th>
                 <td>
-                    <img src="{{ asset('storage/images') }} {{$room->photo}}" alt="{{ $room->title }}" width="100px" height="100px">
+                    <img src="{{ asset('storage/images/rooms/'.$room->photo) }}" alt="{{ $room->title }}" width="100px" height="100px">
 
                 </td>
             </tr>

@@ -66,9 +66,9 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'title'=>'required',
-        ]);
+        // $request->validate([
+        //     'title'=>'required',
+        // ]);
         $department=Department::find($id);
         $department->title=$request->title;
         $department->details=$request->details;

@@ -57,7 +57,7 @@ class DepartmentController extends Controller
         $department->title=$request->title;
         $department->details=$request->details;
         $department->save();
-        return response()->json( $department);  
+        return response()->json( $department);
 
     }
 

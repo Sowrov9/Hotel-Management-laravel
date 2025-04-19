@@ -12,11 +12,17 @@
     <!-- Lightbox CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
 
+    {{-- <link rel="stylesheet" type="text/css" href="{{asset('public/vendor/lightbox2-2.11.3/dist/css/lightbox.min.css')}}" /> --}}
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
-
+    <style type="text/css">
+        html {
+  scroll-behavior: smooth;
+}
+    </style>
 </head>
 
 <body>
@@ -32,10 +38,10 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active text-white" aria-current="page" href="#">Services</a>
+                        <a class="nav-link active text-white" aria-current="page" href="#service">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Gallery</a>
+                        <a class="nav-link text-white" href="#gallery">Gallery</a>
                     </li>
                     <li class="nav-item">
                         {{-- <a class="nav-link btn btn-success shadow-none" href="#">Booking</a> --}}
@@ -82,7 +88,7 @@
     {{-- Slider end --}}
 
     {{-- Service start --}}
-    <div class="container my-4">
+    <div class="container my-4" id="service">
         <h1 class="text-center">Services</h1>
         <hr>
         <div class="row my-4">
@@ -90,7 +96,7 @@
                 <img src="{{ asset('assets/images/1740547753_images (1).jpg') }}" alt="..." class="img-thumbnail">
             </div>
             <div class="col-md-8">
-                <h3>Service Heading</h3>
+                <h3>Virus</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime unde amet totam ipsa in. Cumque
                     molestiae magnam voluptas in praesentium eum architecto totam consequuntur ipsam, iure,
                     exercitationem consequatur ullam nobis?</p>
@@ -112,36 +118,54 @@
         </div>
     </div>
 
-    <div class="container my-4">
+    <div id="gallery" class="container my-4">
         <h1 class="text-center">Gallery</h1>
         <div class="row my-4">
             @foreach ($roomtypes as $roomtype)
-                <div class="col-md-3">
+                <div class="col-md-4 my-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title"><a href="">{{ $roomtype->title }}</a></h5>
-                            @foreach ($roomtype->roomtypeimages as $img)
-                                <a href="{{ asset('storage/images/' . $img->img_src) }}" data-lightbox="gallery"
+                            <h5 class="card-title">{{ $roomtype->title }}</h5>
+                            {{-- @foreach ($roomtype->roomtypeimages as $img) --}}
+                                {{-- <a href="{{ asset('storage/images/' . $img->img_src) }}" data-lightbox="rgallery{{$roomtype->id}}"
                                     data-title="{{ $img->title }}">
-                                    <img src="{{ asset('storage/images/' . $img->img_src) }}" alt="Gallery Image"
+                                    <img class="img-fluid" src="{{ asset('storage/images/' . $img->img_src) }}" alt="Gallery Image"
                                         width="150">
-                                </a>
-                                {{-- <img src="{{ asset('storage/images/' . $img->img_src) }}"
-                                    alt="{{ $roomtype->title }}" width="100px" height="100px"> --}}
-                            @endforeach
+                                </a> --}}
+                                <div id="carouselExampleIndicators{{$roomtype->id}}" class="carousel slide">
+                                    {{-- <div class="carousel-indicators">
+                                        <button type="button" data-bs-target="#carouselExampleIndicators{{$roomtype->id}}" data-bs-slide-to="0" class="active"
+                                            aria-current="true" aria-label="Slide 1"></button>
+                                        <button type="button" data-bs-target="#carouselExampleIndicators{{$roomtype->id}}" data-bs-slide-to="1"
+                                            aria-label="Slide 2"></button>
+                                        <button type="button" data-bs-target="#carouselExampleIndicators{{$roomtype->id}}" data-bs-slide-to="2"
+                                            aria-label="Slide 3"></button>
+                                    </div> --}}
+                                    <div class="carousel-inner">
+                                        @foreach ($roomtype->roomtypeimages as $key=>$img)
+                                            <div class="carousel-item {{$key == 0 ? 'active': ''}}">
+                                                <img src="{{ asset('storage/images/'.$img->img_src) }}" class="d-block w-100" style="height: 300px; object-fit: cover;" alt="...">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators{{$roomtype->id}}"
+                                        data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators{{$roomtype->id}}"
+                                        data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                            {{-- @endforeach --}}
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
     </div>
-    {{-- Service end --}}
-    @section('scripts')
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
-    @endsection
-
-
 </body>
 
 </html>

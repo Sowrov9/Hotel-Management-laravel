@@ -13,6 +13,17 @@ use Illuminate\Support\Facades\Route;
 
 //frontend home route
 Route::get('/',[HomeController::class,'home']);
+
+//Customer login,register route
+Route::get('/login',[CustomerController::class,'login']);
+Route::post('/customer/login',[CustomerController::class,'customer_login']);
+Route::get('/register',[CustomerController::class,'register']);
+
+
+
+
+
+// Backend
 //login/logout route
 Route::get('admin/login',[AdminController::class,'login']);
 Route::post('admin/login',[AdminController::class,'login_check']);

@@ -53,6 +53,8 @@
         </div>
     </nav>
 
+@extends('pages.frontend.frontlayout')
+@section('content')
     {{-- Slider start --}}
     <div id="carouselExampleIndicators" class="carousel slide">
         <div class="carousel-indicators">
@@ -169,3 +171,6 @@
 </body>
 
 </html>
+    {{-- Service end --}}
+
+@endsection

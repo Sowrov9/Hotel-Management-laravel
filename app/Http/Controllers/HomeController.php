@@ -9,6 +9,6 @@ class HomeController extends Controller
 {
     public function home(){
         $roomtypes= RoomType::all();
-        return view("pages.home",compact('roomtypes'));
+        return view("pages.frontend.home",compact('roomtypes'));
     }
 }

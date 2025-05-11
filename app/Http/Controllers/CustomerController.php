@@ -162,4 +162,8 @@ class CustomerController extends Controller
     public function register(){
         return view("pages.frontend.register");
     }
+    public function logout(){
+        Session()->forget(['customerlogin','data']);
+        return redirect('login');
+    }
 }

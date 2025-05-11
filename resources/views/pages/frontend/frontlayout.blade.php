@@ -37,12 +37,19 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">Gallery</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="{{url('login')}}">LogIn</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="{{url('register')}}">Register</a>
-                    </li>
+                    @if (Session::has('customerlogin'))
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ url('logout') }}">LogOut</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ url('login') }}">LogIn</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ url('register') }}">Register</a>
+                        </li>
+                    @endif
+
                     <li class="nav-item">
                         {{-- <a class="nav-link btn btn-success shadow-none" href="#">Booking</a> --}}
                         <a class="nav-link btn btn-success" href="#"
@@ -56,4 +63,5 @@
         @yield('content')
     </main>
 </body>
+
 </html>

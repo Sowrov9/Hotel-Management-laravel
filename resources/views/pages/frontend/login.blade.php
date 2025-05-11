@@ -26,5 +26,8 @@
         </table>
     </form>
 </div>
+<div class="container">
+    <h6>Haven't register yet? <a href="{{url('/register')}}">Register here</a></h6>
+</div>
 
 @endsection

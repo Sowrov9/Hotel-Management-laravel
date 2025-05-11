@@ -172,7 +172,4 @@
 
 </html>
     {{-- Service end --}}
-
-
-
 @endsection

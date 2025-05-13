@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class BookingController extends Controller
 {
@@ -135,6 +136,13 @@ class BookingController extends Controller
             )", [$room_type_id, $checkin_date, $checkout_date]);
 
         return response()->json(['data' => $arooms]);
+    }
+
+    public function frontend_booking(){
+        if(!Session::has('customerlogin')){
+            return redirect('login')->with('error', 'Login first to book a room.');
+        }
+        return view("pages.frontend.frontbooking");
     }
 
 }

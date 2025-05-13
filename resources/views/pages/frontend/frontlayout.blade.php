@@ -32,6 +32,9 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="{{url('/')}}">Home</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active text-white" aria-current="page" href="#">Services</a>
                     </li>
                     <li class="nav-item">
@@ -41,6 +44,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ url('logout') }}">LogOut</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-success" href="{{ url('booking') }}"
+                                style="background-color: #292b29; color:white">Booking</a>
+                        </li>
                     @else
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ url('login') }}">LogIn</a>
@@ -48,13 +55,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ url('register') }}">Register</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-success" href="{{url('login')}}"
+                                style="background-color: #292b29; color:white">Booking</a>
+                        </li>
                     @endif
 
-                    <li class="nav-item">
-                        {{-- <a class="nav-link btn btn-success shadow-none" href="#">Booking</a> --}}
-                        <a class="nav-link btn btn-success" href="#"
-                            style="background-color: #292b29; color:white">Booking</a>
-                    </li>
                 </ul>
             </div>
         </div>
